@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./styles/index.scss";
+import Map from "./components/map/Map";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="app-container">
+      <div id="map-placeholder">
+        <Map />
+      </div>
+      <div id="layer-panel-placeholder"></div>
+      <div id="search-panel-placeholder"></div>
+      <div id="info-panel-placeholder"></div>
     </div>
   );
-}
+};
 
 export default App;
