@@ -9,9 +9,7 @@ class Map extends React.Component {
   async componentDidMount() {
     this.renderMap();
 
-    const kingdomsGeojson = await getKingdoms();
-    this.addKingdomGeojson(kingdomsGeojson);
-
+    this.addKingdomGeojson(await getKingdoms());
     this.toggleLayer("kingdom");
   }
 
