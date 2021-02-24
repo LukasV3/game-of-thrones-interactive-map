@@ -10,11 +10,13 @@ class InfoPanel extends React.Component {
           onClick={() => this.refs.container.classList.toggle("info-active")}
           className="info-title"
         >
-          <h1>Nothing Selected</h1>
+          <h1>{this.props.name || "Nothing Selected"}</h1>
         </div>
         <div className="info-body">
           <div className="info-content-container">
-            <div ref="content" className="info-content"></div>
+            <div ref="content" className="info-content">
+              {this.props.summary || ""}
+            </div>
           </div>
         </div>
       </div>
