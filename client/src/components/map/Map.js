@@ -13,6 +13,45 @@ class Map extends React.Component {
     this.toggleLayer("kingdom");
   }
 
+  componentDidUpdate() {
+    // only runs if there is a searchterm
+    if (Object.keys(this.props.searchResult).length === 0) return;
+
+    const { name, layerName, id } = this.props.searchResult;
+
+    // this.setHighlightedRegion(name);
+
+    if (!this.isLayerShowing(layerName)) {
+      // Show result layer if currently hidden
+      this.toggleMapLayer(layerName);
+    }
+    this.selectLocation(id, layerName);
+  }
+
+  /** Check if layer is added to map  */
+  isLayerShowing(layerName) {
+    return this.map.hasLayer(this.layers[layerName]);
+  }
+
+  /** Toggle map layer visibility */
+  toggleMapLayer(layerName) {
+    // Toggle active UI status
+    document.querySelector(`[ref=${layerName}-toggle]`).classList.toggle("toggle-active");
+  }
+
+  /** Trigger "click" on layer with provided name */
+  selectLocation(id, layerName) {
+    // Find selected layer
+    const geojsonLayer = this.layers[layerName];
+    const sublayers = geojsonLayer.getLayers();
+    const selectedSublayer = sublayers.find((layer) => {
+      return layer.feature.geometry.properties.id === id;
+    });
+
+    // Zoom map to selected layer
+    this.map.flyToBounds(selectedSublayer.getBounds(), 5);
+  }
+
   renderMap() {
     this.map = L.map("mapid", {
       center: [5, 20],
