@@ -14,29 +14,9 @@ class Map extends React.Component {
   }
 
   componentDidUpdate() {
-    // only runs if there is a searchterm
-    if (Object.keys(this.props.searchResult).length === 0) return;
-
-    const { name, layerName, id } = this.props.searchResult;
-
-    // this.setHighlightedRegion(name);
-
-    if (!this.isLayerShowing(layerName)) {
-      // Show result layer if currently hidden
-      this.toggleMapLayer(layerName);
-    }
-    this.selectLocation(id, layerName);
-  }
-
-  /** Check if layer is added to map  */
-  isLayerShowing(layerName) {
-    return this.map.hasLayer(this.layers[layerName]);
-  }
-
-  /** Toggle map layer visibility */
-  toggleMapLayer(layerName) {
-    // Toggle active UI status
-    document.querySelector(`[ref=${layerName}-toggle]`).classList.toggle("toggle-active");
+    // only runs if there is a NEW searchterm
+    if (!this.props.searchResult.name) return;
+    this.selectLocation(this.props.searchResult.id, this.props.searchResult.layerName);
   }
 
   /** Trigger "click" on layer with provided name */
@@ -50,6 +30,9 @@ class Map extends React.Component {
 
     // Zoom map to selected layer
     this.map.flyToBounds(selectedSublayer.getBounds(), 5);
+
+    // Fire click event
+    selectedSublayer.fireEvent("click");
   }
 
   renderMap() {
@@ -93,9 +76,7 @@ class Map extends React.Component {
     layer.on({
       click: (e) => {
         const { name, id } = feature.properties;
-        this.map.closePopup(); // Deselect selected location marker
         this.setHighlightedRegion(layer); // Highlight kingdom polygon
-        // this.triggerEvent("locationSelected", { name, id, type: "kingdom" });
         this.props.onKingdomClick(name, id);
       },
     });

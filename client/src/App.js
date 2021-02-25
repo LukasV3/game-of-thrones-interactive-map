@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./styles/index.scss";
 import Map from "./components/map/Map";
 import InfoPanel from "./components/infoPanel/InfoPanel";
@@ -26,10 +26,11 @@ class App extends React.Component {
   showInfo = async (name, id) => {
     // Download and display information, based on location type
     const { summary } = await getKingdomInfo(id);
-    this.setState({ selected: { name, summary } });
+    this.setState({ selected: { name, summary }, searchResult: {} });
   };
 
   goToSearchResult = (searchResult) => {
+    // this.showInfo(searchResult.item.name, searchResult.item.id);
     this.setState({ searchResult: searchResult.item });
   };
 
