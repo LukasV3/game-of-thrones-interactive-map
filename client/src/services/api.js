@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "http://127.0.0.1:5000/api/v1/kingdoms",
+  baseURL: "https://game-of-thrones-interactive.herokuapp.com/api/v1/kingdoms",
   withCredentials: false,
   headers: {
     "Access-Control-Allow-Origin": "*",
