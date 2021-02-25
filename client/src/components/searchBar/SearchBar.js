@@ -37,24 +37,13 @@ class SearchBar extends React.Component {
     this.refs.results.appendChild(layerItem);
   }
 
-  //   displaySearchResult(searchResult) {
-  //     return (
-  //       <div onClick={() => this.searchResultSelected(searchResult)}>
-  //         {searchResult.name}
-  //       </div>
-  //     );
-  //   }
-
   /** Display the selected search result  */
   searchResultSelected(searchResult) {
     // Clear search input and results
-    this.refs.input.value = "";
+    this.setState({ term: "" });
     this.refs.results.innerHTML = "";
 
     this.props.onSearchClick(searchResult);
-
-    // Send selected result to listeners
-    // this.triggerEvent("resultSelected", searchResult);
   }
 
   render() {
@@ -71,9 +60,7 @@ class SearchBar extends React.Component {
             onChange={this.onInputChange}
           ></input>
         </div>
-        <div ref="results" className="search-results">
-          {/* {this.displaySearchResult} */}
-        </div>
+        <div ref="results" className="search-results"></div>
       </div>
     );
   }

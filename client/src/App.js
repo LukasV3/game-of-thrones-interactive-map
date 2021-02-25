@@ -12,7 +12,6 @@ class App extends React.Component {
   state = {
     selected: {},
     searchResult: {},
-    // kingdomsGeojson: [{ type: "MultiLineString", coordinates: [] }],
   };
 
   async componentDidMount() {
@@ -24,29 +23,24 @@ class App extends React.Component {
   }
 
   showInfo = async (name, id) => {
-    // Download and display information, based on location type
+    // Download and display kingdom information
     const { summary } = await getKingdomInfo(id);
     this.setState({ selected: { name, summary }, searchResult: {} });
   };
 
-  goToSearchResult = (searchResult) => {
-    // this.showInfo(searchResult.item.name, searchResult.item.id);
+  updateSearchResult = (searchResult) => {
     this.setState({ searchResult: searchResult.item });
   };
 
   render() {
     return (
-      <div id="app-container">
-        <Map
-          // kingdomsGeojson={this.state.kingdomsGeojson}
-          onKingdomClick={this.showInfo}
-          searchResult={this.state.searchResult}
-        />
+      <div>
+        <Map onKingdomClick={this.showInfo} searchResult={this.state.searchResult} />
         <InfoPanel
           name={this.state.selected.name}
           summary={this.state.selected.summary}
         />
-        <SearchBar onSearchClick={this.goToSearchResult} />
+        <SearchBar onSearchClick={this.updateSearchResult} />
       </div>
     );
   }

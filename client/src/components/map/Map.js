@@ -1,6 +1,5 @@
 import React from "react";
 import "./styles.scss";
-// import { MapContainer, TileLayer, Polygon, GeoJSON } from "react-leaflet";
 import L from "leaflet";
 
 import { getKingdoms } from "../../services/api";
@@ -14,7 +13,7 @@ class Map extends React.Component {
   }
 
   componentDidUpdate() {
-    // only runs if there is a NEW searchterm
+    // only runs if there is a searchterm
     if (!this.props.searchResult.name) return;
     this.selectLocation(this.props.searchResult.id, this.props.searchResult.layerName);
   }
@@ -49,7 +48,6 @@ class Map extends React.Component {
 
     this.map.zoomControl.setPosition("bottomright"); // Position zoom control
     this.layers = {}; // Map layer dict (key/value = title/layer)
-    this.selectedRegion = null; // Store currently selected region
 
     // Render Carto GoT tile baselayer
     L.tileLayer(
@@ -77,7 +75,7 @@ class Map extends React.Component {
       click: (e) => {
         const { name, id } = feature.properties;
         this.setHighlightedRegion(layer); // Highlight kingdom polygon
-        this.props.onKingdomClick(name, id);
+        this.props.onKingdomClick(name, id); // Show kingdom info in InfoPanel
       },
     });
   }
@@ -107,7 +105,7 @@ class Map extends React.Component {
   }
 
   render() {
-    return <div ref="mapContainer" id="mapid" className="map-container"></div>;
+    return <div id="mapid" className="map-container"></div>;
   }
 }
 
