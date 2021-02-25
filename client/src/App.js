@@ -5,8 +5,7 @@ import InfoPanel from "./components/infoPanel/InfoPanel";
 import SearchBar from "./components/searchBar/SearchBar";
 
 import Search from "./services/search";
-import { getKingdomInfo } from "./services/api";
-import { getKingdoms } from "./services/api";
+import kingdoms from "./services/api";
 
 class App extends React.Component {
   state = {
@@ -16,7 +15,8 @@ class App extends React.Component {
 
   async componentDidMount() {
     // Download kingdom boundaries
-    const kingdomsGeojson = await getKingdoms();
+    const res = await kingdoms.get("/");
+    const kingdomsGeojson = res.data;
 
     // Add boundary data to search service
     Search.addGeoJsonItems(kingdomsGeojson, "kingdom");
@@ -24,7 +24,8 @@ class App extends React.Component {
 
   showInfo = async (name, id) => {
     // Download and display kingdom information
-    const { summary } = await getKingdomInfo(id);
+    const res = await kingdoms.get(`/${id}/summary`);
+    const { summary } = res.data;
     this.setState({ selected: { name, summary }, searchResult: {} });
   };
 

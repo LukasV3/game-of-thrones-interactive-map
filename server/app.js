@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+const path = require("path");
 
 const kingdomRouter = require("./routes/kingdomRoutes");
 
@@ -16,6 +17,14 @@ if (process.env === "development") {
 
 // Routes
 app.use("/api/v1/kingdoms", kingdomRouter);
+
+// Serves all static files from the build directory.
+app.use(express.static(path.join(__dirname, "build")));
+
+// Serves  index.html file on any unknown routes.
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 // Handling unhandled routes (accessing an undefined route...)
 app.all("*", (req, res, next) => {

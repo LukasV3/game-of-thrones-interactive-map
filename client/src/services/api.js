@@ -1,11 +1,10 @@
-import { get } from "axios";
+import axios from "axios";
 
-export const getKingdomInfo = async (id) => {
-  const res = await get(`http://127.0.0.1:5000/api/v1/kingdoms/${id}/summary`);
-  return res.data;
-};
-
-export const getKingdoms = async () => {
-  const res = await get("http://127.0.0.1:5000/api/v1/kingdoms");
-  return res.data;
-};
+export default axios.create({
+  baseURL: "http://127.0.0.1:5000/api/v1/kingdoms",
+  withCredentials: false,
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+  },
+});

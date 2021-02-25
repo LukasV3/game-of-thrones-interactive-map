@@ -2,13 +2,14 @@ import React from "react";
 import "./styles.scss";
 import L from "leaflet";
 
-import { getKingdoms } from "../../services/api";
+import kingdoms from "../../services/api";
 
 class Map extends React.Component {
   async componentDidMount() {
     this.renderMap();
 
-    this.addKingdomGeojson(await getKingdoms());
+    const res = await kingdoms.get("/");
+    this.addKingdomGeojson(res.data);
     this.toggleLayer("kingdom");
   }
 
