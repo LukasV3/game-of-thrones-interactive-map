@@ -14,12 +14,6 @@ module.exports.getKingdomBoundaries = async (req, res, next) => {
     });
 
     res.send(boundaries);
-
-    // res.status(200).json({
-    //   status: "success",
-    //   results: kingdoms.length,
-    //   data: boundaries,
-    // });
   } catch (err) {
     console.log(err);
     next();
