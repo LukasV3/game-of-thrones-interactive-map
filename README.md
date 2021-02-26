@@ -1,6 +1,6 @@
 # Game of Thrones Interactive Map
 
-This is an interactive map based on the popular show Game of Thrones.
+This is an interactive map based on the popular TV series Game of Thrones built using React, Leaflet, Node.js, and MongoDB.
 
 To explore the live app visit [https://game-of-thrones-interactive.herokuapp.com](https://game-of-thrones-interactive.herokuapp.com/).
 
