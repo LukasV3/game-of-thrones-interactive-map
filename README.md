@@ -12,7 +12,7 @@ The app has been deployed using heroku from a different repo which can be found 
 
 Inspiration for the app came from Patrick Triest's implementation using Webpack, Leaflet, and framework-less Javascript components on the frontend and Node.js (koa), PostGIS, and Redis on the backend.
 
-I however have implemented it using **React**, and **Leaflet** on the frontend, and **Node.js (express)**, and **MongoDB (mongoose)** on the backend. I have kept much of the styles the same and have focused on implementing the same functionality using entirely different technologies.
+I have implemented it using **React**, and **Leaflet** on the frontend, and **Node.js (express)**, and **MongoDB (mongoose)** on the backend. I have kept much of the styles the same and have focused on implementing the same functionality using entirely different technologies.
 
 #### Structure
 
